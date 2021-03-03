@@ -19,11 +19,7 @@ const QUEUES = [
         },
         async handle(job) {
           return new Promise((resolve, reject)=>{
-     
             try {
-     
-                console.log(console.log(job.data))
-                throw new Error('Nada')
                 //resolve(console.log(job.data))
                 
             } catch (error) {
@@ -45,13 +41,11 @@ const queues = QUEUES.reduce((newQueues ,queue) => {
     }
 }, {});
 
-setTimeout(() => {
-    console.log(queues['OrderVtexQueue'].add, typeof queues['OrderVtexQueue'].add)
-    queues['OrderVtexQueue'].add({ tetse: '123'}, {
-        delay: 300,
-        attempts: 5
-      })
-}, 10000)
+
+queues['OrderVtexQueue'].add({ tetse: '123'}, {
+    delay: 300,
+    attempts: 5
+  })
 module.exports = {
     queues
 }
