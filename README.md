@@ -17,24 +17,22 @@ const QUEUES = [
           delay: 300,
           attempts: 5
         },
-        async handle(job) {
+        handle(job) {
           return new Promise((resolve, reject)=>{
             try {
-                //resolve(console.log(job.data))
+                resolve(console.log(job.data))
                 
             } catch (error) {
                 reject(console.log(error))
             }
-     
           })
         },
       }
 ]
 
 const queues = QUEUES.reduce((newQueues ,queue) => {
-    const cratedQueue = new Queue(queue.name, redisConf)
-    console.log(cratedQueue.process, typeof cratedQueue.process)
-    cratedQueue.process(queue.handle)
+    const createdQueue = new Queue(queue.name, redisConf)
+    createdQueue.process(queue.handle)
     return {
         [queue.name]: cratedQueue,
         ...newQueues
